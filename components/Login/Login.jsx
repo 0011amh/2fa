@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
-
+import { signIn } from 'next-auth/react'
 
 const login = () => {
 
@@ -13,11 +13,16 @@ const login = () => {
         const fd = new FormData(e.currentTarget)
         const email = fd.get('email')
         const password = fd.get('password')
-        if(password!='123')
-            setError("Wrong Password")
+
+        const response = await signIn('credentials',{email:email,password:password})
+
+        if(!response?.error){
+            router.replace("/")
+            router.refresh
+        }
+            
         else{
-                router.replace('/')
-                router.refresh()
+                setError("Wrong Password")
         }
 
     }
