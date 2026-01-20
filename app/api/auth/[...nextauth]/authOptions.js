@@ -29,10 +29,10 @@ if (user) {
 token.id = user.id
 token.email = user.email
 token.otpVerified = false;
-token.roleId = user.roleId;
+token.roleId = "Viewer";
 
 }
-77
+
 return token;
 
 }   }}
